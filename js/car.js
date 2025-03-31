@@ -27,8 +27,7 @@ class Car {
     update() {
         // Update position based on speed and angle
         if (this.speed !== 0) {
-            // Subtract 90 degrees because 0 degrees should point right (car's initial orientation)
-            const rad = Utils.degreesToRadians(this.angle - 90);
+            const rad = Utils.degreesToRadians(this.angle);
             this.x += Math.cos(rad) * this.speed;
             this.y += Math.sin(rad) * this.speed;
         }
@@ -67,8 +66,8 @@ class Car {
         // Translate to car's center
         ctx.translate(this.x + this.width/2, this.y + this.height/2);
         
-        // Rotate (subtract 90 degrees to align with movement direction)
-        ctx.rotate(Utils.degreesToRadians(this.angle - 90));
+        // Rotate
+        ctx.rotate(Utils.degreesToRadians(this.angle));
         
         // Draw the car image centered
         ctx.drawImage(

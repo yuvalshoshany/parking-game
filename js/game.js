@@ -24,6 +24,11 @@ class Game {
         // Keyboard events
         window.addEventListener('keydown', (e) => {
             this.keys[e.key] = true;
+            
+            // Prevent scrolling with arrow keys
+            if(['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' '].includes(e.key)) {
+                e.preventDefault();
+            }
         });
         
         window.addEventListener('keyup', (e) => {
@@ -31,10 +36,12 @@ class Game {
         });
         
         // Settings button
-        document.querySelector('.settings-btn').addEventListener('click', () => {
-            // TODO: Implement settings menu
-            console.log('Settings clicked');
-        });
+        const settingsBtn = document.querySelector('.settings-btn');
+        if (settingsBtn) {
+            settingsBtn.addEventListener('click', () => {
+                console.log('Settings clicked');
+            });
+        }
     }
     
     handleInput() {
@@ -52,6 +59,13 @@ class Game {
         if (this.keys['ArrowRight']) {
             car.turn(1);
         }
+        
+        // Reset level on R key
+        if (this.keys['r'] || this.keys['R']) {
+            this.level = new Level(this.currentLevel);
+            this.keys['r'] = false;
+            this.keys['R'] = false;
+        }
     }
     
     update(deltaTime) {
@@ -60,12 +74,6 @@ class Game {
         
         // Update level
         this.level.update(deltaTime);
-        
-        // Check level completion
-        if (this.level.completed) {
-            this.currentLevel++;
-            this.level = new Level(this.currentLevel);
-        }
         
         // Update UI
         document.getElementById('time').textContent = 
@@ -85,11 +93,20 @@ class Game {
         // Draw level
         this.level.draw(this.ctx);
         
-        // Draw game over or level complete message
+        // Draw game over message
         if (this.level.failed) {
-            this.drawMessage('Game Over! Press R to restart', '#FF0000');
-        } else if (this.level.completed) {
-            this.drawMessage('Level Complete!', '#00FF00');
+            this.ctx.save();
+            this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            
+            this.ctx.fillStyle = '#FF0000';
+            this.ctx.font = '48px Arial';
+            this.ctx.textAlign = 'center';
+            this.ctx.textBaseline = 'middle';
+            this.ctx.fillText('Game Over!', this.canvas.width/2, this.canvas.height/2);
+            this.ctx.font = '24px Arial';
+            this.ctx.fillText('Press R to restart', this.canvas.width/2, this.canvas.height/2 + 50);
+            this.ctx.restore();
         }
     }
     
@@ -104,16 +121,6 @@ class Game {
                 }
             }
         }
-    }
-    
-    drawMessage(text, color) {
-        this.ctx.save();
-        this.ctx.fillStyle = color;
-        this.ctx.font = '48px Arial';
-        this.ctx.textAlign = 'center';
-        this.ctx.textBaseline = 'middle';
-        this.ctx.fillText(text, this.canvas.width/2, this.canvas.height/2);
-        this.ctx.restore();
     }
     
     gameLoop(timestamp) {

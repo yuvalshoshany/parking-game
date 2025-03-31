@@ -1,21 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="70" height="40" viewBox="0 0 70 40" xmlns="http://www.w3.org/2000/svg">
+<svg width="91" height="52" viewBox="0 0 91 52" xmlns="http://www.w3.org/2000/svg">
     <!-- Main body -->
-    <path d="M5,5 H65 Q68,5 68,8 V32 Q68,35 65,35 H5 Q2,35 2,32 V8 Q2,5 5,5 Z" fill="#4169E1"/>
+    <path d="M5,5 H86 Q89,5 89,8 V44 Q89,47 86,47 H5 Q2,47 2,44 V8 Q2,5 5,5 Z" fill="#4169E1"/>
     
-    <!-- Front windshield -->
-    <path d="M15,8 H55 Q56,8 56,9 V15 H14 V9 Q14,8 15,8 Z" fill="#1a1a1a"/>
+    <!-- Front windshield (darker, more angular) -->
+    <path d="M60,10 H80 Q81,10 81,11 V20 H59 V11 Q59,10 60,10 Z" fill="#1a1a1a"/>
     
-    <!-- Rear windshield -->
-    <path d="M15,25 H55 Q56,25 56,26 V31 H14 V26 Q14,25 15,25 Z" fill="#1a1a1a"/>
+    <!-- Rear windshield (more rectangular) -->
+    <path d="M10,10 H30 Q31,10 31,11 V20 H9 V11 Q9,10 10,10 Z" fill="#1a1a1a"/>
     
     <!-- Side mirrors -->
-    <rect x="0" y="15" width="3" height="6" rx="1" fill="#4169E1"/>
-    <rect x="67" y="15" width="3" height="6" rx="1" fill="#4169E1"/>
+    <rect x="0" y="20" width="3" height="8" rx="1" fill="#4169E1"/>
+    <rect x="88" y="20" width="3" height="8" rx="1" fill="#4169E1"/>
+    
+    <!-- Front grill (to indicate front of car) -->
+    <rect x="82" y="25" width="5" height="12" fill="#333333"/>
+    
+    <!-- Headlights -->
+    <rect x="81" y="15" width="6" height="8" rx="2" fill="#FFF9C4"/>
+    <rect x="81" y="35" width="6" height="8" rx="2" fill="#FFF9C4"/>
+    
+    <!-- Taillights -->
+    <rect x="4" y="15" width="4" height="8" rx="2" fill="#FF0000"/>
+    <rect x="4" y="35" width="4" height="8" rx="2" fill="#FF0000"/>
     
     <!-- Wheels -->
-    <rect x="15" y="2" width="10" height="4" rx="2" fill="#1a1a1a"/>
-    <rect x="45" y="2" width="10" height="4" rx="2" fill="#1a1a1a"/>
-    <rect x="15" y="34" width="10" height="4" rx="2" fill="#1a1a1a"/>
-    <rect x="45" y="34" width="10" height="4" rx="2" fill="#1a1a1a"/>
+    <rect x="20" y="2" width="12" height="5" rx="2" fill="#1a1a1a"/>
+    <rect x="60" y="2" width="12" height="5" rx="2" fill="#1a1a1a"/>
+    <rect x="20" y="45" width="12" height="5" rx="2" fill="#1a1a1a"/>
+    <rect x="60" y="45" width="12" height="5" rx="2" fill="#1a1a1a"/>
 </svg> 
