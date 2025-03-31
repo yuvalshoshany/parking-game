@@ -222,26 +222,49 @@ class Level {
             y: this.parkingSpot.y + this.parkingSpot.height/2
         };
         
-        // Add some margin for easier parking (5 pixels on each side)
-        const margin = 5;
+        // Add some margin for easier parking (10 pixels on each side)
+        const margin = 10;
+        
+        // Transform car corners to parking spot's coordinate system
+        const transformedCorners = carCorners.map(corner => {
+            // Translate to origin
+            const dx = corner.x - spotCenter.x;
+            const dy = corner.y - spotCenter.y;
+            
+            // Rotate
+            const angle = -this.parkingSpot.angle;
+            const rad = Utils.degreesToRadians(angle);
+            const rotatedX = dx * Math.cos(rad) - dy * Math.sin(rad);
+            const rotatedY = dx * Math.sin(rad) + dy * Math.cos(rad);
+            
+            // Translate back
+            return {
+                x: rotatedX + spotCenter.x,
+                y: rotatedY + spotCenter.y
+            };
+        });
+        
+        // Get transformed bounds
+        const transformedBounds = this.getMinMaxPoints(transformedCorners);
+        
         // Check if car is within parking spot
         const carInSpot = (
-            carBounds.minX >= this.parkingSpot.x - margin &&
-            carBounds.maxX <= this.parkingSpot.x + this.parkingSpot.width + margin &&
-            carBounds.minY >= this.parkingSpot.y - margin &&
-            carBounds.maxY <= this.parkingSpot.y + this.parkingSpot.height + margin
+            transformedBounds.minX >= this.parkingSpot.x - margin &&
+            transformedBounds.maxX <= this.parkingSpot.x + this.parkingSpot.width + margin &&
+            transformedBounds.minY >= this.parkingSpot.y - margin &&
+            transformedBounds.maxY <= this.parkingSpot.y + this.parkingSpot.height + margin
         );
 
         // Normalize angles to 0-360 range
         let carAngle = ((this.playerCar.angle % 360) + 360) % 360;
         let spotAngle = ((this.parkingSpot.angle % 360) + 360) % 360;
         
-        // Check if car is at correct angle (within 15 degrees)
+        // Check if car is at correct angle (within 20 degrees)
         const angleDiff = Math.abs(carAngle - spotAngle);
-        const angleOk = angleDiff < 15 || angleDiff > 345;
+        const angleOk = angleDiff < 20 || angleDiff > 340;
         
         // Car must be almost stopped, in the spot, and at roughly the correct angle
-        const isParked = carInSpot && angleOk && Math.abs(this.playerCar.speed) < 0.2; // More lenient speed check
+        const isParked = carInSpot && angleOk && Math.abs(this.playerCar.speed) < 0.2;
         
         // Only set completed if not already completed
         if (isParked && !this.completed) {
