@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="70" height="40" viewBox="0 0 70 40" xmlns="http://www.w3.org/2000/svg">
+    <!-- Main body -->
+    <path d="M5,5 H65 Q68,5 68,8 V32 Q68,35 65,35 H5 Q2,35 2,32 V8 Q2,5 5,5 Z" fill="#4169E1"/>
+    
+    <!-- Front windshield -->
+    <path d="M15,8 H55 Q56,8 56,9 V15 H14 V9 Q14,8 15,8 Z" fill="#1a1a1a"/>
+    
+    <!-- Rear windshield -->
+    <path d="M15,25 H55 Q56,25 56,26 V31 H14 V26 Q14,25 15,25 Z" fill="#1a1a1a"/>
+    
+    <!-- Side mirrors -->
+    <rect x="0" y="15" width="3" height="6" rx="1" fill="#4169E1"/>
+    <rect x="67" y="15" width="3" height="6" rx="1" fill="#4169E1"/>
+    
+    <!-- Wheels -->
+    <rect x="15" y="2" width="10" height="4" rx="2" fill="#1a1a1a"/>
+    <rect x="45" y="2" width="10" height="4" rx="2" fill="#1a1a1a"/>
+    <rect x="15" y="34" width="10" height="4" rx="2" fill="#1a1a1a"/>
+    <rect x="45" y="34" width="10" height="4" rx="2" fill="#1a1a1a"/>
+</svg> 
